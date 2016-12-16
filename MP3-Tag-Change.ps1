@@ -37,7 +37,9 @@ if(!$path)
 {
     try
     {
-    $path = Select-FolderDialog
+        $path = Select-FolderDialog
+        #Remove ReadOnly attribute
+        dir $path -r *.* | % { $_.fullname } | % { attrib -r $_ }
     } catch
     {
         Write-Host $_
